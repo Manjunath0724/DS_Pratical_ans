@@ -1,338 +1,230 @@
 #include <iostream>
 using namespace std;
 
-class Node
+struct Node
 {
-public:
     int data;
     Node *next;
 };
 
 Node *head = NULL;
 
-// Display List
 void display()
 {
-    if(head == NULL)
+    Node *temp = head;
+
+    while (temp != NULL)
     {
-        cout << "List is Empty\n";
+        cout << temp->data << " ";
+        temp = temp->next;
     }
-    else
-    {
-        Node *temp = head;
 
-        cout << "\nLinked List:\n";
-
-        while(temp != NULL)
-        {
-            cout << temp->data << " ";
-
-            temp = temp->next;
-        }
-
-        cout << endl;
-    }
+    cout << endl;
 }
 
-// Insert at End
 void insertEnd(int value)
 {
     Node *newNode = new Node();
-
     newNode->data = value;
     newNode->next = NULL;
 
-    if(head == NULL)
+    if (head == NULL)
     {
         head = newNode;
-    }
-    else
-    {
-        Node *temp = head;
-
-        while(temp->next != NULL)
-        {
-            temp = temp->next;
-        }
-
-        temp->next = newNode;
+        return;
     }
 
-    cout << value << " inserted at end\n";
+    Node *temp = head;
+
+    while (temp->next != NULL)
+        temp = temp->next;
+
+    temp->next = newNode;
 }
 
-// Delete from End
-void deleteEnd()
-{
-    if(head == NULL)
-    {
-        cout << "List is Empty\n";
-    }
-    else if(head->next == NULL)
-    {
-        delete head;
-
-        head = NULL;
-
-        cout << "Last node deleted\n";
-    }
-    else
-    {
-        Node *temp = head;
-
-        while(temp->next->next != NULL)
-        {
-            temp = temp->next;
-        }
-
-        delete temp->next;
-
-        temp->next = NULL;
-
-        cout << "Last node deleted\n";
-    }
-}
-
-// Insert at Beginning
 void insertBeginning(int value)
 {
     Node *newNode = new Node();
 
     newNode->data = value;
-
     newNode->next = head;
 
     head = newNode;
-
-    cout << value << " inserted at beginning\n";
 }
 
-// Delete from Beginning
 void deleteBeginning()
 {
-    if(head == NULL)
-    {
-        cout << "List is Empty\n";
-    }
-    else
-    {
-        Node *temp = head;
+    if (head == NULL)
+        return;
 
-        head = head->next;
+    Node *temp = head;
 
-        delete temp;
+    head = head->next;
 
-        cout << "First node deleted\n";
-    }
+    delete temp;
 }
 
-// Insert at Specific Position
-void insertPosition(int value, int pos)
+void deleteEnd()
 {
-    Node *newNode = new Node();
+    if (head == NULL)
+        return;
 
-    newNode->data = value;
-
-    if(pos == 1)
+    if (head->next == NULL)
     {
-        newNode->next = head;
-
-        head = newNode;
-    }
-    else
-    {
-        Node *temp = head;
-
-        for(int i = 1; i < pos - 1; i++)
-        {
-            temp = temp->next;
-        }
-
-        newNode->next = temp->next;
-
-        temp->next = newNode;
+        delete head;
+        head = NULL;
+        return;
     }
 
-    cout << value << " inserted at position " << pos << endl;
+    Node *temp = head;
+
+    while (temp->next->next != NULL)
+        temp = temp->next;
+
+    delete temp->next;
+    temp->next = NULL;
 }
 
-// Count Nodes
 void countNodes()
 {
     int count = 0;
 
     Node *temp = head;
 
-    while(temp != NULL)
+    while (temp != NULL)
     {
         count++;
-
         temp = temp->next;
     }
 
-    cout << "Number of nodes: " << count << endl;
+    cout << "Total Nodes: " << count << endl;
 }
 
-// Sort Linked List
-void sortList()
+void insertAtPosition(int value, int pos)
 {
-    if(head == NULL)
-    {
-        cout << "List is Empty\n";
+    Node *newNode = new Node();
+    newNode->data = value;
 
+    if (pos == 1)
+    {
+        newNode->next = head;
+        head = newNode;
         return;
     }
 
+    Node *temp = head;
+
+    for (int i = 1; i < pos - 1 && temp != NULL; i++)
+        temp = temp->next;
+
+    if (temp == NULL)
+        return;
+
+    newNode->next = temp->next;
+    temp->next = newNode;
+}
+
+void sortList()
+{
     Node *i, *j;
+    int temp;
 
-    for(i = head; i != NULL; i = i->next)
+    for (i = head; i != NULL; i = i->next)
     {
-        for(j = i->next; j != NULL; j = j->next)
+        for (j = i->next; j != NULL; j = j->next)
         {
-            if(i->data > j->data)
+
+            if (i->data > j->data)
             {
-                int temp = i->data;
-
+                temp = i->data;
                 i->data = j->data;
-
                 j->data = temp;
             }
         }
     }
-
-    cout << "List Sorted Successfully\n";
 }
 
-// Insert in Sorted List
 void insertSorted(int value)
 {
     Node *newNode = new Node();
 
     newNode->data = value;
-    newNode->next = NULL;
 
-    if(head == NULL || value < head->data)
+    if (head == NULL || head->data >= value)
     {
         newNode->next = head;
-
         head = newNode;
-    }
-    else
-    {
-        Node *temp = head;
-
-        while(temp->next != NULL && temp->next->data < value)
-        {
-            temp = temp->next;
-        }
-
-        newNode->next = temp->next;
-
-        temp->next = newNode;
+        return;
     }
 
-    cout << value << " inserted into sorted list\n";
+    Node *temp = head;
+
+    while (temp->next != NULL && temp->next->data < value)
+        temp = temp->next;
+
+    newNode->next = temp->next;
+    temp->next = newNode;
 }
 
 int main()
 {
+
     int choice, value, pos;
 
-    while(true)
+    do
     {
-        cout << "\n1. Display";
-        cout << "\n2. Insert at End";
-        cout << "\n3. Delete from End";
-        cout << "\n4. Insert at Specific Position";
-        cout << "\n5. Count Nodes";
-        cout << "\n6. Insert at Beginning";
-        cout << "\n7. Delete from Beginning";
-        cout << "\n8. Sort List";
-        cout << "\n9. Insert in Sorted List";
-        cout << "\n10. Exit";
+        cout << "\n1.Display\n2.Insert End\n3.Delete End\n4.Insert Position\n";
+        cout << "5.Count Nodes\n6.Insert Beginning\n7.Delete Beginning\n";
+        cout << "8.Sort List\n9.Insert Sorted\n10.Exit\n";
 
-        cout << "\nEnter your choice: ";
+        cout << "Enter your choice: ";
         cin >> choice;
 
-        switch(choice)
+        switch (choice)
         {
-            case 1:
 
-                display();
-                break;
+        case 1:
+            display();
+            break;
 
-            case 2:
+        case 2:
+            cin >> value;
+            insertEnd(value);
+            break;
 
-                cout << "Enter value: ";
-                cin >> value;
+        case 3:
+            deleteEnd();
+            break;
 
-                insertEnd(value);
+        case 4:
+            cin >> value >> pos;
+            insertAtPosition(value, pos);
+            break;
 
-                break;
+        case 5:
+            countNodes();
+            break;
 
-            case 3:
+        case 6:
+            cin >> value;
+            insertBeginning(value);
+            break;
 
-                deleteEnd();
+        case 7:
+            deleteBeginning();
+            break;
 
-                break;
+        case 8:
+            sortList();
+            break;
 
-            case 4:
-
-                cout << "Enter value: ";
-                cin >> value;
-
-                cout << "Enter position: ";
-                cin >> pos;
-
-                insertPosition(value, pos);
-
-                break;
-
-            case 5:
-
-                countNodes();
-
-                break;
-
-            case 6:
-
-                cout << "Enter value: ";
-                cin >> value;
-
-                insertBeginning(value);
-
-                break;
-
-            case 7:
-
-                deleteBeginning();
-
-                break;
-
-            case 8:
-
-                sortList();
-
-                break;
-
-            case 9:
-
-                cout << "Enter value: ";
-                cin >> value;
-
-                insertSorted(value);
-
-                break;
-
-            case 10:
-
-                return 0;
-
-            default:
-
-                cout << "Invalid Choice";
+        case 9:
+            cin >> value;
+            insertSorted(value);
+            break;
         }
-    }
+
+    } while (choice != 10);
 
     return 0;
 }
