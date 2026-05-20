@@ -18,7 +18,7 @@ void display()
         cout << temp->data << " ";
         temp = temp->next;
     }
-
+  
     cout << endl;
 }
 
@@ -188,6 +188,7 @@ int main()
             break;
 
         case 2:
+            cout << "Enter value to insert: ";
             cin >> value;
             insertEnd(value);
             break;
