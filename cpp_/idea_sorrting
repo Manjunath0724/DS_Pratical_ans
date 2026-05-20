@@ -1,0 +1,156 @@
+# Sorting Techniques — Simple Viva Explanation
+
+## 1. Bubble Sort
+
+### Idea
+
+Compare two adjacent elements and swap them if they are in wrong order.
+
+Largest element moves to the end after every pass like a bubble rising upward.
+
+### Example
+
+```text id="exhhjx"
+5 3 1
+
+5 and 3 → swap
+3 5 1
+
+5 and 1 → swap
+3 1 5
+```
+
+### Short Viva Line
+
+“Bubble sort repeatedly compares adjacent elements and swaps them until array becomes sorted.”
+
+---
+
+## 2. Insertion Sort
+
+### Idea
+
+Take one element and place it in correct position in sorted part of array.
+
+Works like arranging playing cards in hand.
+
+### Example
+
+```text id="vawdxi"
+5 3 1
+
+Take 3 and insert before 5
+3 5 1
+
+Take 1 and insert at beginning
+1 3 5
+```
+
+### Short Viva Line
+
+“Insertion sort inserts each element into its correct position one by one.”
+
+---
+
+## 3. Selection Sort
+
+### Idea
+
+Find smallest element and place it at correct position.
+
+### Example
+
+```text id="mykqhj"
+5 3 1
+
+Smallest = 1
+Swap with first element
+
+1 3 5
+```
+
+### Short Viva Line
+
+“Selection sort repeatedly selects minimum element and places it at correct position.”
+
+---
+
+## 4. Merge Sort
+
+### Idea
+
+Divide array into smaller parts, sort them, then merge them.
+
+### Example
+
+```text id="amjlwm"
+5 3 1 2
+
+Divide:
+5 3 | 1 2
+
+Sort:
+3 5 | 1 2
+
+Merge:
+1 2 3 5
+```
+
+### Short Viva Line
+
+“Merge sort uses divide and conquer by dividing array and merging sorted parts.”
+
+---
+
+## 5. Quick Sort
+
+### Idea
+
+Choose a pivot element and place smaller elements on left and larger on right.
+
+### Example
+
+```text id="e4kkz4"
+5 3 1 4
+
+Pivot = 4
+
+3 1 | 4 | 5
+```
+
+Then sort left side again.
+
+### Short Viva Line
+
+“Quick sort selects a pivot and partitions array into smaller and larger elements.”
+
+---
+
+## 6. Heap Sort
+
+### Idea
+
+Convert array into heap tree and repeatedly remove largest element.
+
+### Example
+
+```text id="7jlwmq"
+Largest element moves to end one by one.
+```
+
+### Short Viva Line
+
+“Heap sort uses heap data structure to repeatedly extract largest element.”
+
+---
+
+# One-Line Memory Trick
+
+| Sorting   | Main Idea         |
+| --------- | ----------------- |
+| Bubble    | Swap adjacent     |
+| Insertion | Insert correctly  |
+| Selection | Select minimum    |
+| Merge     | Divide and merge  |
+| Quick     | Pivot partition   |
+| Heap      | Heap tree sorting |
